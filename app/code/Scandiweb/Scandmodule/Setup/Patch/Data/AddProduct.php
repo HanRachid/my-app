@@ -17,8 +17,12 @@ use Magento\InventoryApi\Api\Data\SourceItemInterfaceFactory;
 use Magento\InventoryApi\Api\SourceItemsSaveInterface;
 use Magento\Store\Model\StoreManagerInterface;
 
-class CustomPatch implements DataPatchInterface
+class AddProduct implements DataPatchInterface
 {
+    /**
+     *
+     * @var ProductInterfaceFactory
+     */
     protected ProductInterfaceFactory $productInterfaceFactory;
 
     /**
@@ -35,6 +39,7 @@ class CustomPatch implements DataPatchInterface
      * @var CategoryLinkManagementInterface
      */
     protected CategoryLinkManagementInterface $categoryLink;
+
     /**
      * @var StoreManagerInterface
      */
@@ -60,6 +65,18 @@ class CustomPatch implements DataPatchInterface
      */
     protected array $sourceItems = [];
 
+    /**
+     *
+     * @param ProductInterfaceFactory $productInterfaceFactory
+     * @param ProductRepositoryInterface $productRepository
+     * @param State $appState
+     * @param SourceItemInterfaceFactory $sourceItemFactory
+     * @param StoreManagerInterface $storeManager
+     * @param EavSetup $eavSetup
+     * @param SourceItemsSaveInterface $sourceItemsSaveInterface
+     * @param CategoryLinkManagementInterface $categoryLink
+     * @return void
+     */
     public function __construct(
         ProductInterfaceFactory $productInterfaceFactory,
         ProductRepositoryInterface $productRepository,
@@ -80,16 +97,22 @@ class CustomPatch implements DataPatchInterface
         $this->categoryLink = $categoryLink;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function apply(): void
     {
         $this->appState->emulateAreaCode('adminhtml', [$this, 'execute']);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function execute(): void
     {
         $product = $this->productInterfaceFactory->create();
 
-        if ($product->getIdBySku('A gold chain')) {
+        if ($product->getIdBySku('grip-trainer')) {
             return;
         }
 
@@ -98,13 +121,13 @@ class CustomPatch implements DataPatchInterface
         $product->setTypeId(Type::TYPE_SIMPLE)
             ->setWebsiteIds($websiteIDs)
             ->setAttributeSetId($attributeSetId)
-            ->setName('A gold chain')
-                ->setUrlKey('goldchain')
-            ->setSku('Gold-chain')
-            ->setPrice(200)
+            ->setName('Grip Trainer')
+                ->setUrlKey('griptrainer')
+            ->setSku('grip-trainer')
+            ->setPrice(9.99)
             ->setVisibility(Visibility::VISIBILITY_BOTH)
             ->setStatus(Status::STATUS_ENABLED)
-            ->setStockData(['use_config_manage_stock' => 51 , 'is_qty_decimal' => 1, 'is_in_stock' => 1]);
+            ->setStockData(['use_config_manage_stock' => 1, 'is_qty_decimal' => 0, 'is_in_stock' => 1]);
         $product = $this->productRepository->save($product);
 
         $sourceItem = $this->sourceItemFactory->create();
