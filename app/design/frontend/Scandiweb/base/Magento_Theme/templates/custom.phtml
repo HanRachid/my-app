@@ -1,23 +1,16 @@
 <?php
 //create block_identifier static block
-echo $block->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('block_identifier')->toHtml();?>
+echo $block->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('block_identifier')->toHtml(); ?>
 
 
-<?php
-$text = <<<HTML
-
-        <div
-            style=
-                "text-align: center;
-                font-size: 20px;
-                font-weight: 600;
-                color: rgb(3, 3, 3);
-                outline: 1px solid red;
-                margin: 15px;"
-            class="test">
-            Free shipping for all orders.
-        </div>
-
-   
-HTML;
-echo __($text); ?>
+<div
+style=
+    "text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+    color: rgb(3, 3, 3);
+    outline: 1px solid red;
+    margin: 15px;"
+class="test">
+Free shipping for all orders
+</div>

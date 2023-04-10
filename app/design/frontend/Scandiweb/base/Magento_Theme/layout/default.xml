@@ -8,7 +8,10 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">   
       <body>  
         <referenceContainer name="header-wrapper">
+        <container name="footerContainer" htmlTag="div" htmlId="cart-container-id" htmlClass="cart-container" before="-">
+
             <block ifconfig="carriers/freeshipping/active" class="Magento\Framework\View\Element\Template" name="customblock" before="-" template="Magento_Theme::custom.phtml" />
+            </container>
         </referenceContainer>
         <move element="form.subscribe" before="-" destination="page.bottom"/>
     </body>
