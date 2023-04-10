@@ -20,7 +20,6 @@ use Magento\Store\Model\StoreManagerInterface;
 class AddTestProduct implements DataPatchInterface
 {
     /**
-     *
      * @var ProductInterfaceFactory
      */
     protected ProductInterfaceFactory $productInterfaceFactory;
@@ -97,7 +96,7 @@ class AddTestProduct implements DataPatchInterface
     }
 
     /**
-     * {@inheritDoc}
+     * @return void
      */
     public function apply(): void
     {
@@ -105,7 +104,7 @@ class AddTestProduct implements DataPatchInterface
     }
 
     /**
-     * {@inheritDoc}
+     * @return void
      */
     public function execute(): void
     {
@@ -142,7 +141,7 @@ class AddTestProduct implements DataPatchInterface
     }
 
     /**
-     * {@inheritDoc}
+     * @return array
      */
     public static function getDependencies(): array
     {
@@ -150,7 +149,7 @@ class AddTestProduct implements DataPatchInterface
     }
 
     /**
-     * {@inheritDoc}
+     * @return array
      */
     public function getAliases(): array
     {

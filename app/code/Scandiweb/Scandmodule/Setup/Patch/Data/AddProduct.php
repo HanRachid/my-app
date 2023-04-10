@@ -20,7 +20,6 @@ use Magento\Store\Model\StoreManagerInterface;
 class AddProduct implements DataPatchInterface
 {
     /**
-     *
      * @var ProductInterfaceFactory
      */
     protected ProductInterfaceFactory $productInterfaceFactory;
@@ -98,7 +97,7 @@ class AddProduct implements DataPatchInterface
     }
 
     /**
-     * {@inheritDoc}
+     * @return void
      */
     public function apply(): void
     {
@@ -106,7 +105,7 @@ class AddProduct implements DataPatchInterface
     }
 
     /**
-     * {@inheritDoc}
+     * @return void
      */
     public function execute(): void
     {
